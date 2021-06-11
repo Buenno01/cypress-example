@@ -3,6 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "npm run test:ci"
+    }
+  },
   "scripts": {
     "test": "jest --passWithNoTests",
     "test:watch": "npm test -- --watch",
@@ -33,11 +39,5 @@
   },
   "dependencies": {
     "axios": "^0.21.1"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "npm run test:ci"
-    }
   }
 }
