@@ -1,1 +1,1 @@
-export default './account-models.ts'
+export * from './account-model'
