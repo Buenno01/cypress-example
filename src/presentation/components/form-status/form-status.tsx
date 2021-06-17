@@ -1,16 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Styles from './form-status-styles.scss'
 import Loader from '@/presentation/components/loader/loader'
+import Context from '@/presentation/contexts/form/form-context'
 
-type Props = {
-  error: string
-}
-
-const FormStatus: React.FC<Props> = (props: Props) => {
+const FormStatus: React.FC = () => {
+  const { isLoading, errorMessage } = useContext(Context)
   return (
-    <div className={Styles.errorWrap}>
-      <Loader className={Styles.loader} />
-      <span className={Styles.error}>{ props.error }</span>
+    <div data-testid="error-wrap" className={Styles.errorWrap}>
+      { isLoading && <Loader className={Styles.loader} /> }
+      { errorMessage && <span className={Styles.error}>{ errorMessage }</span> }
     </div>
   )
 }
