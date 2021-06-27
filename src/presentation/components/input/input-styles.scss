@@ -10,7 +10,7 @@
     flex-grow: 1;
   }
 
-  .status {
+  .statusError {
     position: absolute;
     right: 16px;
     width: 16px;
@@ -19,5 +19,9 @@
     border-radius: 50%;
     display: block;
     cursor: help;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFF;
   }
 }
