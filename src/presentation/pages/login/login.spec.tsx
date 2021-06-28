@@ -70,7 +70,7 @@ describe('Login Component', () => {
     const errorMessage = faker.random.words()
     validationSpy.errorMessage = errorMessage
     const passwordInput = sut.getByTestId('password')
-    fireEvent.input(passwordInput, { target: { value: faker.internet.email() } })
+    fireEvent.input(passwordInput, { target: { value: faker.internet.password() } })
     const passwordStatus = sut.getByTestId('password-status')
     expect(passwordStatus.title).toBe(validationSpy.errorMessage)
     expect(passwordStatus.className).toBe('statusError')
@@ -85,5 +85,16 @@ describe('Login Component', () => {
     const emailStatus = sut.getByTestId('email-status')
     expect(emailStatus.title).toBe('Campo válido')
     expect(emailStatus.className).toBe('statusSuccess')
+  })
+
+  test('Should show valid password state if Validation succeeds', () => {
+    const { sut, validationSpy } = makeSut()
+    const errorMessage = null
+    validationSpy.errorMessage = errorMessage
+    const passwordInput = sut.getByTestId('password')
+    fireEvent.input(passwordInput, { target: { value: faker.internet.password() } })
+    const passwordStatus = sut.getByTestId('password-status')
+    expect(passwordStatus.title).toBe('Campo válido')
+    expect(passwordStatus.className).toBe('statusSuccess')
   })
 })
