@@ -1,13 +1,19 @@
 import { Validation } from '@/presentation/protocols/validation'
 
-export class ValidationSpy implements Validation {
+interface Field {
+  value: string
+  name: string
   errorMessage: string
+}
+
+export class ValidationSpy implements Validation {
+  fields: { [fieldName: string]: Field }
   fieldName: string
   fieldValue: string
+  errorMessage: string
 
   validate (fieldName: string, fieldValue: string): string {
-    this.fieldName = fieldName
-    this.fieldValue = fieldValue
-    return this.errorMessage
+    this.fields = { ...this.fields, [fieldName]: { value: fieldValue, errorMessage: this.errorMessage, name: fieldName } }
+    return this.fields[fieldName].errorMessage
   }
 }
