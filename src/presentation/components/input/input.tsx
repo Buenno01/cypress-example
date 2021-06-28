@@ -15,10 +15,10 @@ const Input: React.FC<Props> = (props: Props) => {
     })
   }
   const getStatusClass = (): string => {
-    return Styles.statusError
+    return error ? Styles.statusError : Styles.statusSuccess
   }
   const getTitle = (): string => {
-    return error
+    return error || 'Campo válido'
   }
   const enableInput = (event: React.FocusEvent<HTMLInputElement>): void => {
     event.target.readOnly = false

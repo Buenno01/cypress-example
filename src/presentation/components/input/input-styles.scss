@@ -24,4 +24,19 @@
     justify-content: center;
     color: #FFF;
   }
+
+  .statusSuccess {
+    position: absolute;
+    right: 16px;
+    width: 16px;
+    height: 16px;
+    background-color: $green;
+    border-radius: 50%;
+    display: block;
+    cursor: help;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFF;
+  }
 }
