@@ -1,12 +1,15 @@
 import React from 'react'
 import { HashRouter, Switch, Route } from 'react-router-dom'
-import { Login } from '../../pages'
 
-const Router: React.FC = () => {
+type Props = {
+  makeLogin: React.FC
+}
+
+const Router: React.FC<Props> = ({ makeLogin }: Props) => {
   return (
     <HashRouter>
       <Switch>
-        <Route exact path='/login' component={Login} />
+        <Route exact path='/login' component={makeLogin} />
       </Switch>
     </HashRouter>
   )
