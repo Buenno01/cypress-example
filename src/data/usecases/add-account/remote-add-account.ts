@@ -12,13 +12,13 @@ export class RemoteAddAccount implements AddAccount {
   }
 
   async add (params: AddAccount.Params): Promise<AddAccount.Model> {
-    const { statusCode } = await this.httpPostClient.post({
+    const { statusCode, body } = await this.httpPostClient.post({
       url: this.url,
       body: params
     })
 
     switch (statusCode) {
-      case HttpStatusCode.ok: return null
+      case HttpStatusCode.ok: return body
       case HttpStatusCode.forbidden: throw new EmailInUseError()
       default: throw new UnexpectedError()
     }
