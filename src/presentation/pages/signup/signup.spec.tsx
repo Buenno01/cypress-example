@@ -3,6 +3,7 @@ import { cleanup, fireEvent, render, RenderResult, waitFor } from '@testing-libr
 import SignUp from './signup'
 import { AddAccountSpy, FormHelper, ValidationSpy } from '@/presentation/test/'
 import faker from 'faker'
+import { EmailInUseError } from '@/domain/errors'
 
 const simulateValidSubmit = async (sut: RenderResult, name = faker.name.findName(), email = faker.internet.email(), password = faker.internet.password()): Promise<void> => {
   FormHelper.populateField(sut, 'name', name)
@@ -140,5 +141,14 @@ describe('SignUp Component', () => {
     const { sut, addAccountSpy } = makeSut({ validationError })
     await simulateValidSubmit(sut)
     expect(addAccountSpy.callsCount).toBe(0)
+  })
+
+  test('Should present error if AddAccount fails', async () => {
+    const { sut, addAccountSpy } = makeSut()
+    const error = new EmailInUseError()
+    jest.spyOn(addAccountSpy, 'add').mockRejectedValue(error)
+    await simulateValidSubmit(sut)
+    FormHelper.testElementText(sut, 'main-error', error.message)
+    FormHelper.testChildCount(sut, 'error-wrap', 1)
   })
 })
