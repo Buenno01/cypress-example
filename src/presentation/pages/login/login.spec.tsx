@@ -60,16 +60,16 @@ describe('Login Component', () => {
     const { sut, validationSpy } = makeSut()
     const email = faker.internet.email()
     FormHelper.populateField(sut, 'email', email)
-    expect(validationSpy.fields.email.name).toBe('email')
-    expect(validationSpy.fields.email.value).toBe(email)
+    expect(validationSpy.input.email.name).toBe('email')
+    expect(validationSpy.input.email.value).toBe(email)
   })
 
   test('Should call Validation with correct password', () => {
     const { sut, validationSpy } = makeSut()
     const password = faker.internet.password()
     FormHelper.populateField(sut, 'password', password)
-    expect(validationSpy.fields.password.name).toBe('password')
-    expect(validationSpy.fields.password.value).toBe(password)
+    expect(validationSpy.input.password.name).toBe('password')
+    expect(validationSpy.input.password.value).toBe(password)
   })
 
   test('Should show email error if Validation fails', () => {

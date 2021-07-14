@@ -7,13 +7,12 @@ interface Field {
 }
 
 export class ValidationSpy implements Validation {
-  fields: { [fieldName: string]: Field }
-  fieldName: string
-  fieldValue: string
+  input: { [fieldName: string]: Field }
   errorMessage: string
 
-  validate (fieldName: string, fieldValue: string): string {
-    this.fields = { ...this.fields, [fieldName]: { value: fieldValue, errorMessage: this.errorMessage, name: fieldName } }
-    return this.fields[fieldName].errorMessage
+  validate (fieldName: string, input: object): string {
+    input[fieldName] = { value: input[fieldName], errorMessage: this.errorMessage, name: fieldName }
+    this.input = input as { [fieldName: string]: Field }
+    return this.errorMessage
   }
 }
