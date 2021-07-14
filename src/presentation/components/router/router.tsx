@@ -1,17 +1,17 @@
-import { SignUp } from '@/presentation/pages'
 import React from 'react'
 import { HashRouter, Switch, Route } from 'react-router-dom'
 
-type Props = {
+type Factory = {
   makeLogin: React.FC
+  makeSignUp: React.FC
 }
 
-const Router: React.FC<Props> = ({ makeLogin }: Props) => {
+const Router: React.FC<Factory> = (factory: Factory) => {
   return (
     <HashRouter>
       <Switch>
-        <Route exact path='/login' component={makeLogin} />
-        <Route exact path='/signup' component={SignUp} />
+        <Route exact path='/login' component={factory.makeLogin} />
+        <Route exact path='/signup' component={factory.makeSignUp} />
       </Switch>
     </HashRouter>
   )
