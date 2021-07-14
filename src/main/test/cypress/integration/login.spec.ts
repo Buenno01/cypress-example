@@ -35,26 +35,49 @@ describe('Login', () => {
   })
 
   it('Should present error state if invalid credentials are provided', () => {
+    cy.intercept('POST', /login/, {
+      statusCode: 401,
+      body: {
+        error: faker.random.words()
+      }
+    })
     cy.getByTestId('email').focus().type(faker.internet.email())
     cy.getByTestId('password').focus().type(faker.random.alphaNumeric(5))
     cy.getByTestId('submit').click()
     cy.getByTestId('error-wrap')
-      .getByTestId('loader').should('exist')
-      .getByTestId('main-error').should('not.exist')
-      .getByTestId('loader').should('not.exist')
-      .getByTestId('main-error').should('contain.text', 'Credenciais inválidas')
+    cy.getByTestId('loader').should('not.exist')
+    cy.getByTestId('main-error').should('contain.text', 'Credenciais inválidas')
+    cy.url().should('equal', `${baseUrl}/login`)
+  })
+
+  it('Should present UnexpectedError if invalid data is returned', () => {
+    cy.intercept('POST', /login/, {
+      statusCode: 200,
+      body: {
+        invalidProperty: faker.random.words()
+      }
+    })
+    cy.getByTestId('email').focus().type(faker.internet.email())
+    cy.getByTestId('password').focus().type(faker.random.alphaNumeric(5))
+    cy.getByTestId('submit').click()
+    cy.getByTestId('error-wrap')
+    cy.getByTestId('loader').should('not.exist')
+    cy.getByTestId('main-error').should('contain.text', 'Algum erro ocorreu. Tente novamente em breve.')
     cy.url().should('equal', `${baseUrl}/login`)
   })
 
   it('Should present save accesstoken if valid credentials are provided', () => {
+    cy.intercept('POST', /login/, {
+      statusCode: 200,
+      body: {
+        accessToken: faker.datatype.uuid()
+      }
+    })
     cy.getByTestId('email').focus().type('mango@gmail.com')
     cy.getByTestId('password').focus().type('12345')
     cy.getByTestId('submit').click()
-    cy.getByTestId('error-wrap')
-      .getByTestId('loader').should('exist')
-      .getByTestId('main-error').should('not.exist')
-      .getByTestId('loader').should('not.exist')
-      .getByTestId('main-error').should('not.exist')
+    cy.getByTestId('loader').should('not.exist')
+    cy.getByTestId('main-error').should('not.exist')
     cy.url().should('equal', `${baseUrl}/`)
     cy.window().then(window => assert.isOk(window.localStorage.getItem('accessToken')))
   })
