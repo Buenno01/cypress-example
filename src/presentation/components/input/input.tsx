@@ -25,8 +25,20 @@ const Input: React.FC<Props> = (props: Props) => {
   }
   return (
     <div className={Styles.inputWrap}>
-      <input {...props} data-testid={props.name} readOnly onFocus={enableInput} onChange={handleChange} />
-      <span data-testid={`${props.name}-status`} title={getTitle()} className={getStatusClass()}></span>
+      <input
+        {...props}
+        placeholder=" "
+        data-testid={props.name}
+        readOnly
+        autoComplete="off"
+        onFocus={enableInput}
+        onChange={handleChange} />
+        <label>{props.placeholder}</label>
+      <span
+        data-testid={`${props.name}-status`}
+        title={getTitle()}
+        className={getStatusClass()}
+      ></span>
     </div>
   )
 }
