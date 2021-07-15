@@ -64,6 +64,13 @@ describe('SignUp', () => {
     Helper.testUrl('/signup')
   })
 
+  it('Should present UnexpectedError on default error cases', () => {
+    Http.mockUnexpectedError()
+    simulateValidSubmit()
+    Helper.testMainError('Algum erro ocorreu. Tente novamente em breve.')
+    Helper.testUrl('/signup')
+  })
+
   it('Should present UnexpectedError if invalid data is returned', () => {
     Http.mockInvalidData()
     simulateValidSubmit()
