@@ -21,10 +21,14 @@ export class HttpPostClientSpy<TypeParams, TypeResponse> implements HttpPostClie
   }
 }
 
-export class HttpGetClientSpy implements HttpGetClient {
-  url: string
+export class HttpGetClientSpy<ResponseType> implements HttpGetClient<ResponseType> {
+  public url: string
+  public response: HttpResponse<ResponseType> = {
+    statusCode: HttpStatusCode.ok
+  }
 
-  async get (params: HttpGetParams): Promise<void> {
+  async get (params: HttpGetParams): Promise<HttpResponse<ResponseType>> {
     this.url = params.url
+    return await Promise.resolve(this.response)
   }
 }
