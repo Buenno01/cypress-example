@@ -1,42 +1,72 @@
 @import '../../styles/global.scss';
 
 .inputWrap {
-  margin-top: 16px;
-  display: flex;
+  margin-top: 40px;
   position: relative;
-  align-items: center;
+  border-bottom: 2px dashed $disabledColor;
+
+  &[data-status="valid"] {
+    border-bottom-color: $valid;
+    
+    &::after {
+      background-color: $valid;
+    }
+  }
+
+  &[data-status="invalid"] {
+    border-bottom-color: $invalid;
+
+    &::after {
+      background-color: $invalid;
+    }
+  }
+
+  &::after {
+    content: "";
+    width: 100%;
+    height: 2px;
+    background-color: $disabledColor;
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    transform-origin: 0%;
+    transform: scaleX(0);
+    transition: transform .5s ease;
+  }
+
+  &:focus-within {
+    border-color: transparent;
+    
+    &::after {
+      transform: scaleX(1);
+    }
+
+    label {
+      transform: scale(0.9) translateY(-20px);
+    }
+  }
 
   input {
-    flex-grow: 1;
+    width: 100%;
+    line-height: 2px;
+    padding: 0 40px 10px 8px;
+    z-index: 1;
+    position: relative;
+    background-color: rgba(0, 0, 0, 0);
+
+    &:not(:placeholder-shown) + label { // placeholder preenchido
+      transform: scale(0.9) translateY(-20px);
+    }
   }
 
-  .statusError {
+  label {
     position: absolute;
-    right: 16px;
-    width: 16px;
-    height: 16px;
-    background-color: $red;
-    border-radius: 50%;
-    display: block;
-    cursor: help;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #FFF;
-  }
-
-  .statusSuccess {
-    position: absolute;
-    right: 16px;
-    width: 16px;
-    height: 16px;
-    background-color: $green;
-    border-radius: 50%;
-    display: block;
-    cursor: help;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #FFF;
+    left: 8px;
+    color: $disabledColor;
+    cursor: text;
+    transform-origin: 0%;
+    transform: translateY(0);
+    transition: transform .5s ease;
+    z-index: 0;
   }
 }

@@ -11,10 +11,11 @@ export const testButtonIsDisabled = (sut: RenderResult, fieldName: string, isDis
   expect(element.disabled).toBe(isDisabled)
 }
 
-export const testStatusFieldValidation = (sut: RenderResult, fieldName: string, validationError?: string): void => {
-  const fieldStatus = sut.getByTestId(`${fieldName}-status`)
-  expect(fieldStatus.title).toBe(validationError || 'Campo válido')
-  expect(fieldStatus.className).toBe(validationError ? 'statusError' : 'statusSuccess')
+export const testStatusFieldValidation = (sut: RenderResult, fieldName: string, validationError: string = ''): void => {
+  const wrap = sut.getByTestId(`${fieldName}-wrap`)
+  const field = sut.getByTestId(`${fieldName}`)
+  expect(wrap.getAttribute('data-status')).toBe(validationError ? 'invalid' : 'valid')
+  expect(field.title).toBe(validationError)
 }
 
 export const populateField = (sut: RenderResult, fieldName: string, value = faker.random.word()): void => {

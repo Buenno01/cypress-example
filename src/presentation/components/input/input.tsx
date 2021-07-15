@@ -14,19 +14,30 @@ const Input: React.FC<Props> = (props: Props) => {
       [event.target.name]: event.target.value
     })
   }
-  const getStatusClass = (): string => {
-    return error ? Styles.statusError : Styles.statusSuccess
+
+  const getStatus = (): string => {
+    return error ? 'invalid' : 'valid'
   }
-  const getTitle = (): string => {
-    return error || 'Campo válido'
-  }
+
   const enableInput = (event: React.FocusEvent<HTMLInputElement>): void => {
     event.target.readOnly = false
   }
   return (
-    <div className={Styles.inputWrap}>
-      <input {...props} data-testid={props.name} readOnly onFocus={enableInput} onChange={handleChange} />
-      <span data-testid={`${props.name}-status`} title={getTitle()} className={getStatusClass()}></span>
+    <div
+      data-testid={`${props.name}-wrap`}
+      className={Styles.inputWrap}
+      data-status={getStatus()}
+    >
+      <input
+        {...props}
+        placeholder=" "
+        title={error}
+        data-testid={props.name}
+        readOnly
+        autoComplete="off"
+        onFocus={enableInput}
+        onChange={handleChange} />
+        <label data-testid={`${props.name}-label`}>{props.placeholder}</label>
     </div>
   )
 }
