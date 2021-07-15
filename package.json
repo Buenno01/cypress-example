@@ -1,6 +1,6 @@
 {
   "name": "clean-react-course",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -10,7 +10,6 @@
     "test:watch": "npm test -- --watch",
     "test:staged": "npm test -- --findRelatedTests",
     "test:ci": "npm test -- --coverage",
-    "test:cypress": "cypress open",
     "prepare": "husky install",
     "check": "npm-check -u -s"
   },
@@ -18,7 +17,6 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@cypress/webpack-preprocessor": "^5.9.1",
     "@testing-library/react": "^12.0.0",
     "@types/axios": "^0.14.0",
     "@types/faker": "^5.5.5",
@@ -30,10 +28,8 @@
     "@typescript-eslint/eslint-plugin": "^4.28.2",
     "clean-webpack-plugin": "^4.0.0-alpha.0",
     "css-loader": "^5.2.6",
-    "cypress": "^7.7.0",
     "eslint": "^7.30.0",
     "eslint-config-standard-with-typescript": "^20.0.0",
-    "eslint-plugin-cypress": "^2.11.3",
     "eslint-plugin-import": "^2.23.2",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.0",
