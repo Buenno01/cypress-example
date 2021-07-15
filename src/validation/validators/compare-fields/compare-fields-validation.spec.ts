@@ -6,10 +6,10 @@ const makeSut = (field, fieldToCompare): CompareFieldsValidation => new CompareF
 
 describe('CompareFieldsValidation', () => {
   test('Should return error if compare is invalid', () => {
-    const field = faker.database.column()
-    const fieldToCompare = faker.database.column()
+    const field = faker.random.alphaNumeric(3)
+    const fieldToCompare = faker.random.alphaNumeric(4)
     const sut = makeSut(field, fieldToCompare)
-    const error = sut.validate({ [field]: faker.random.word(), [fieldToCompare]: faker.random.word() })
+    const error = sut.validate({ [field]: faker.random.alphaNumeric(3), [fieldToCompare]: faker.random.alphaNumeric(4) })
     expect(error).toEqual(new InvalidFieldError())
   })
 
