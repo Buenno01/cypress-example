@@ -87,4 +87,15 @@ describe('SignUp', () => {
     Helper.testUrl('/')
     Helper.testLocalStorageItem('accessToken')
   })
+
+  it('Should prevent multiple submits', () => {
+    Http.mockOk()
+    const password = faker.random.alphaNumeric(5)
+    cy.getByTestId('name').focus().type(faker.name.findName())
+    cy.getByTestId('email').focus().type(faker.internet.email())
+    cy.getByTestId('password').focus().type(password)
+    cy.getByTestId('passwordConfirmation').focus().type(password)
+    cy.getByTestId('submit').dblclick()
+    Helper.testHttpCallsCount(1)
+  })
 })
