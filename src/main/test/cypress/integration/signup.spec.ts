@@ -63,4 +63,12 @@ describe('SignUp', () => {
     Helper.testMainError('Esse e-mail já está em uso')
     Helper.testUrl('/signup')
   })
+
+  it('Should present UnexpectedError if invalid data is returned', () => {
+    Http.mockInvalidData()
+    simulateValidSubmit()
+    cy.getByTestId('error-wrap')
+    Helper.testMainError('Algum erro ocorreu. Tente novamente em breve.')
+    Helper.testUrl('/signup')
+  })
 })
