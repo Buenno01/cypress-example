@@ -1,9 +1,10 @@
 import { HttpStatusCode } from '@/data/protocols/http'
 import { HttpGetClientSpy } from '@/data/test'
 import { UnexpectedError } from '@/domain/errors'
-import { LoadSurveyList } from '@/domain/usecases/load-survey-list'
-import faker from 'faker'
+import { mockSurveyModelList } from '@/domain/test'
+import { LoadSurveyList } from '@/domain/usecases'
 import { RemoteLoadSurveyList } from './remote-load-survey-list'
+import faker from 'faker'
 
 type SutTypes = {
   sut: RemoteLoadSurveyList
@@ -52,5 +53,19 @@ describe('RemoteLoadSurveyList', () => {
     }
     const error = sut.loadAll()
     await expect(error).rejects.toThrowError(new UnexpectedError())
+  })
+
+  test('Should return an list of SurveyModels if httpGetClient returns 200', async () => {
+    const { sut, httpGetClientSpy } = makeSut()
+    const httpResult = mockSurveyModelList()
+    httpGetClientSpy.response = {
+      statusCode: HttpStatusCode.serverError
+    }
+    httpGetClientSpy.response = {
+      statusCode: HttpStatusCode.ok,
+      body: httpResult
+    }
+    const surveyList = await sut.loadAll()
+    expect(surveyList).toEqual(httpResult)
   })
 })
