@@ -18,6 +18,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.0.0",
     "@types/axios": "^0.14.0",
     "@types/faker": "^5.5.5",
@@ -31,6 +32,7 @@
     "css-loader": "^5.2.6",
     "eslint": "^7.30.0",
     "eslint-config-standard-with-typescript": "^20.0.0",
+    "eslint-plugin-cypress": "^2.11.3",
     "eslint-plugin-import": "^2.23.2",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.0",

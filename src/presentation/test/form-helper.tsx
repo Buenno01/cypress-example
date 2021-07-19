@@ -2,20 +2,20 @@ import { fireEvent, screen } from '@testing-library/react'
 import faker from 'faker'
 
 export const testChildCount = (fieldName: string, count: number): void => {
-  const errorWrap = screen.getByTestId(fieldName)
-  expect(errorWrap.childElementCount).toBe(count)
+  expect(screen.getByTestId(fieldName).children).toHaveLength(count)
 }
 
 export const testButtonIsDisabled = (fieldName: string, isDisabled: boolean): void => {
-  const element = screen.getByTestId(fieldName) as HTMLButtonElement
-  expect(element.disabled).toBe(isDisabled)
+  isDisabled
+    ? expect(screen.getByTestId(fieldName)).toBeDisabled()
+    : expect(screen.getByTestId(fieldName)).toBeEnabled()
 }
 
 export const testStatusFieldValidation = (fieldName: string, validationError: string = ''): void => {
   const wrap = screen.getByTestId(`${fieldName}-wrap`)
   const field = screen.getByTestId(`${fieldName}`)
   expect(wrap.getAttribute('data-status')).toBe(validationError ? 'invalid' : 'valid')
-  expect(field.title).toBe(validationError)
+  expect(field).toHaveProperty('title', validationError)
 }
 
 export const populateField = (fieldName: string, value = faker.random.word()): void => {
@@ -24,11 +24,9 @@ export const populateField = (fieldName: string, value = faker.random.word()): v
 }
 
 export const testElementExists = (fieldName: string): void => {
-  const element = screen.getByTestId(fieldName)
-  expect(element).toBeTruthy()
+  expect(screen.queryByTestId(fieldName)).toBeInTheDocument()
 }
 
 export const testElementText = (fieldName: string, text: string): void => {
-  const element = screen.getByTestId(fieldName)
-  expect(element.textContent).toBe(text)
+  expect(screen.getByTestId(fieldName)).toHaveTextContent(text)
 }
