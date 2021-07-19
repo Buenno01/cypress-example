@@ -89,7 +89,7 @@ describe('SignUp', () => {
     cy.getByTestId('loader').should('not.exist')
     cy.getByTestId('main-error').should('not.exist')
     Helper.testUrl('/')
-    Helper.testLocalStorageItem('accessToken')
+    Helper.testLocalStorageItem('account')
   })
 
   it('Should prevent multiple submits', () => {

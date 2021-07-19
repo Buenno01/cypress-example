@@ -12,5 +12,6 @@ export const mockAddAccountParams = (): AddAccount.Params => {
 }
 
 export const mockAddAccountModel = (): AddAccount.Model => ({
-  accessToken: 'mock-access-token'
+  accessToken: 'mock-access-token',
+  name: 'mock-name'
 })
