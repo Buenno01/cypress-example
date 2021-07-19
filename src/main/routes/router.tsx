@@ -1,18 +1,15 @@
 import { SurveyList } from '@/presentation/pages'
 import React from 'react'
 import { HashRouter, Switch, Route } from 'react-router-dom'
+import { makeLogin } from '../factories/pages/login/login-factory'
+import { makeSignUp } from '../factories/pages/signup/signup-factory'
 
-type Factory = {
-  makeLogin: React.FC
-  makeSignUp: React.FC
-}
-
-const Router: React.FC<Factory> = (factory: Factory) => {
+const Router: React.FC = () => {
   return (
     <HashRouter>
       <Switch>
-        <Route exact path='/login' component={factory.makeLogin} />
-        <Route exact path='/signup' component={factory.makeSignUp} />
+        <Route exact path='/login' component={makeLogin} />
+        <Route exact path='/signup' component={makeSignUp} />
         <Route exact path='/' component={SurveyList} />
       </Switch>
     </HashRouter>
