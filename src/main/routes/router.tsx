@@ -1,8 +1,6 @@
 import React from 'react'
-import { SurveyList } from '@/presentation/pages'
 import { HashRouter, Switch, Route } from 'react-router-dom'
-import { makeLogin } from '@/main/factories/pages/login/login-factory'
-import { makeSignUp } from '@/main/factories/pages/signup/signup-factory'
+import { makeLogin, makeSignUp, makeSurveyList } from '@/main/factories/pages'
 import { ApiContext } from '@/presentation/contexts/'
 import { getCurrentAccountAdapter, setCurrentAccountAdapter } from '@/main/adapters/current-account-adapter'
 import { PrivateRoute } from '@/presentation/components'
@@ -19,7 +17,7 @@ const Router: React.FC = () => {
         <Switch>
           <Route exact path='/login' component={makeLogin} />
           <Route exact path='/signup' component={makeSignUp} />
-          <PrivateRoute exact path='/' component={SurveyList} />
+          <PrivateRoute exact path='/' component={makeSurveyList} />
         </Switch>
       </HashRouter>
     </ApiContext.Provider>
