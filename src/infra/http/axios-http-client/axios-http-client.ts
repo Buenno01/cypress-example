@@ -24,7 +24,7 @@ export class AxiosHttpClientAdapter implements HttpPostClient<any, any>, HttpGet
     let httpResponse: HttpResponse
     try {
       const { url } = params
-      const axiosResponse = await axios.get(url)
+      const axiosResponse = await axios.get(url, { headers: params.headers })
       httpResponse = {
         statusCode: axiosResponse.status,
         body: axiosResponse.data
