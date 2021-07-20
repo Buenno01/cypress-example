@@ -71,4 +71,10 @@ describe('AuthorizeHttpGetClientDecorator', () => {
       'x-access-token': getStorageSpy.value.accessToken
     })
   })
+
+  test('Should merge headers if GetStorage is valid', async () => {
+    const { sut, httpGetClientSpy } = makeSut()
+    const httpResponse = await sut.get(mockGetRequest())
+    expect(httpResponse).toEqual(httpGetClientSpy.response)
+  })
 })
