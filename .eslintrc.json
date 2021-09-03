@@ -22,6 +22,8 @@
     "@typescript-eslint/no-floating-promises": "off",
     "react/jsx-uses-react": "error",
     "react/jsx-uses-vars": "error",
-    "@typescript-eslint/no-namespace": "off"
+    "@typescript-eslint/no-namespace": "off",
+    "no-redeclare": "off",
+    "import/export": "off"
   }
 }
